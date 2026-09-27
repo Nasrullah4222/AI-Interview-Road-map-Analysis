@@ -1,4 +1,3 @@
-const  pdfParse  = require("pdf-parse");
 const generateInterviewReport = require("../services/ai.service")
 const interviewReportModel = require("../models/interviewReport.module") 
 const { resume } = require("../services/temp");
@@ -42,7 +41,7 @@ const normalizeSkillGap = (item) => {
  * @description Controller to generate interview report by jobDescription, selfDescription and resume
  */
 async function generateInterviewReportController(req, res) {
-    
+    const pdfParse = require("pdf-parse");
     let resumeText = ""
     if (req.file?.buffer) {
         const resumeContent = await (new pdfParse.PDFParse(Uint8Array.from(req.file.buffer))).getText()
