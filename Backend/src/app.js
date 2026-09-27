@@ -13,6 +13,12 @@ app.use(cors({
     credentials: true,
 }));
 
+app.get("/test", (req, res) => {
+    res.json({
+        message: "Backend is working!"
+    });
+});
+
 /* Require all the routes here. */
 const authRouter = require("./routes/auth.routes")
 const interviewRouter = require("./routes/interview.routes")
