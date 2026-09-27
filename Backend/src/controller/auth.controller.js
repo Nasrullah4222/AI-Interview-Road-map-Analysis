@@ -41,7 +41,11 @@ async function registerUserController(req, res) {
         username: user.username
     }, process.env.JWT_SECRETE, { expiresIn: "1d"});
 
-    res.cookie("token", token);
+    res.cookie("token", token, {
+        httpOnly: true,
+        secure: true,
+        sameSite: "none",
+    });
 
     res.status(201).json({
         message: "User register successfully.",
@@ -91,7 +95,11 @@ async function logIncontroller(req, res) {
         username: user.username
     }, process.env.JWT_SECRETE, { expiresIn: "1d"});
 
-    res.cookie("token", token); //this saves to browser cookie and the name of the cookie = token.
+    res.cookie("token", token, {
+        httpOnly: true,
+        secure: true,
+        sameSite: "none",
+    }); //this saves to browser cookie and the name of the cookie = token.
 
     res.status(201).json({
         message: "User logged in successfully.",
@@ -121,7 +129,11 @@ async function logOutUserController(req, res) {
 
     await tokenBlacklistModel.create({ token });
 
-    res.clearCookie("token");
+    res.clearCookie("token", {
+        httpOnly: true,
+        secure: true,
+        sameSite: "none",
+    });
 
     res.status(200).json({
         message: "User Logged out successfully!"
