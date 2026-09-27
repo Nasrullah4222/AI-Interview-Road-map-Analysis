@@ -8,12 +8,14 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { loading, handleRegister } = useAuth();
+  const { loading, error, handleRegister } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await handleRegister({ username, email, password });
-    navigate("/");
+    const data = await handleRegister({ username, email, password });
+    if (data) {
+      navigate("/");
+    }
   };
 
   if (loading) {
@@ -67,6 +69,7 @@ const Register = () => {
           </div>
           <button className="button primary-button">Login</button>
         </form>
+        {error && <p role="alert">{error}</p>}
         <p>
           Already have an account? <Link to={"/login"}>Login</Link>
         </p>

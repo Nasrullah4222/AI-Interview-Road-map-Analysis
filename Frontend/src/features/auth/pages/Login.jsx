@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import "../aut.form.scss";
 import { useAuth } from "../hooks/useAuth";
 const Login = () => {
-  const { loading, handleLogin } = useAuth();
+  const { loading, error, handleLogin } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -55,6 +55,7 @@ const Login = () => {
           </div>
           <button className="button primary-button">Login</button>
         </form>
+        {error && <p role="alert">{error}</p>}
         <p>
           Don't have an account? <Link to={"/register"}>Register</Link>
         </p>
