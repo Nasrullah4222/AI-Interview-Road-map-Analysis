@@ -2,7 +2,10 @@ const express = require("express");
 const cookieParser = require("cookie-parser");
 const cors = require("cors")
 
+const connectDB = require("./config/db");
 
+
+connectDB();
 
 const app = express();
 
@@ -14,6 +17,7 @@ app.use(cors({
 }));
 
 app.get("/test", (req, res) => {
+    console.log("🔥 TEST ROUTE HIT");
     res.json({
         message: "Backend is working!"
     });
