@@ -5,9 +5,9 @@ const cors = require("cors")
 const connectDB = require("./config/db");
 
 
-connectDB();
-
 const app = express();
+
+connectDB();
 
 app.use(express.json());
 app.use(cookieParser());
