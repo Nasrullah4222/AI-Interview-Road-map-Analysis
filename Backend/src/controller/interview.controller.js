@@ -42,10 +42,12 @@ const normalizeSkillGap = (item) => {
  */
 async function generateInterviewReportController(req, res) {
     const pdfParse = require("pdf-parse");
-    let resumeText = ""
+
+    let resumeText = "";
+
     if (req.file?.buffer) {
-        const resumeContent = await (new pdfParse.PDFParse(Uint8Array.from(req.file.buffer))).getText()
-        resumeText = resumeContent.text
+        const resumeContent = await pdfParse(req.file.buffer);
+        resumeText = resumeContent.text;
     }
     const {selfDescription, jobDescription, } = req.body
 
